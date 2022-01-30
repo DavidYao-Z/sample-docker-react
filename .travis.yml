@@ -1,0 +1,11 @@
+sudo: required 
+language: node_js
+node_js:
+    - "stable"
+    
+services: 
+    - docker
+before_install: 
+    - docker build -t davidyao1995/my-app -f Dockerfile.dev .
+script:     
+    - docker run -e CI=true davidyao1995/my-app npm run test -- --coverage --watchAll=false
